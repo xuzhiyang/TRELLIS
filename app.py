@@ -398,6 +398,8 @@ with gr.Blocks(delete_cache=(600, 600)) as demo:
 
 # Launch the Gradio app
 if __name__ == "__main__":
-    pipeline = TrellisImageTo3DPipeline.from_pretrained("JeffreyXiang/TRELLIS-image-large")
+    # path = "JeffreyXiang/TRELLIS-image-large"
+    path = "../TRELLIS-image-large"
+    pipeline = TrellisImageTo3DPipeline.from_pretrained(path)
     pipeline.cuda()
     demo.launch(server_name="0.0.0.0", server_port=5000, share=True)

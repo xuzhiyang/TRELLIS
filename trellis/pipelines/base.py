@@ -2,7 +2,16 @@ from typing import *
 import torch
 import torch.nn as nn
 from .. import models
+import logging
 
+# 配置日志记录器
+logging.basicConfig(
+    level=logging.DEBUG,  # 设置日志级别
+    format='%(asctime)s - %(levelname)s - %(message)s',  # 设置日志格式
+    handlers=[
+        logging.StreamHandler()  # 将日志输出到控制台
+    ]
+)
 
 class Pipeline:
     """
@@ -32,6 +41,8 @@ class Pipeline:
         else:
             from huggingface_hub import hf_hub_download
             config_file = hf_hub_download(path, "pipeline.json")
+
+        logging.info(f"Loading image... is_local:{is_local}, config_file:{config_file}")
 
         with open(config_file, 'r') as f:
             args = json.load(f)['args']
